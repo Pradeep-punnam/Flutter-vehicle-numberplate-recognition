@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1064689898425",
+    "project_id": "vehicle-pass-app",
+    "storage_bucket": "vehicle-pass-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1064689898425:android:4ec256249ca411e5fe9c68",
+        "android_client_info": {
+          "package_name": "com.example.vehicle_pass_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCikXp1D1b4t342EU57q4zBH0gLxduJgOA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
