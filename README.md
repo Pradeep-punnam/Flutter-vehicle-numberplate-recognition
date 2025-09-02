@@ -2,9 +2,9 @@
 
 A Flutter-based mobile application for **vehicle number plate recognition** and **vehicle data management** using **Firebase Firestore** as backend.  
 Supports **three roles**:  
-- **ADMIN**  
-- **SUPERVISOR**  
-- **SECURITY GUARD**  
+- ADMIN 
+- SUPERVISOR 
+- SECURITY GUARD  
 
 ## ✨ Features
 - Vehicle number plate scanning using camera + YOLO + OCR  
@@ -52,35 +52,37 @@ dependencies:
   firebase_auth: ^5.3.0
 ```
 5. Run:
-
-flutter pub get
+```bash
+  flutter pub get
+```
 3. Initialize Firebase
 
 Edit main.dart:
-
-import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  runApp(const MyApp());
-}
-
+``` dart
+   import 'package:flutter/material.dart';
+   import 'package:firebase_core/firebase_core.dart';
+   
+   void main() async {
+     WidgetsFlutterBinding.ensureInitialized();
+     await Firebase.initializeApp();
+     runApp(const MyApp());
+   }
+```
 🔒 Securing Firebase
 Files you must not share publicly:
-
-google-services.json (Android)
-
-GoogleService-Info.plist (iOS)
-
+``` file
+ google-services.json (Android)
+```
+``` file
+ GoogleService-Info.plist (iOS)
+```
 Firebase API Keys inside these files
 
 ⚠️ If you share your repo, add these to .gitignore:
-
+```files
 android/app/google-services.json
 ios/Runner/GoogleService-Info.plist
-
+```
 Best Practices:
 
 Each developer should create their own Firebase project and add their own config files.
@@ -92,7 +94,8 @@ Enable Firestore Security Rules (see below).
 We use Firestore Collections as tables.
 
 1. Vehicles Collection
-vehicles (collection)
+```path
+ vehicles (collection)
  └── vehicle_id (document ID)
        ├── vehicle_number: string
        ├── owner_name: string
@@ -101,24 +104,27 @@ vehicles (collection)
        ├── validity_start: timestamp
        ├── validity_end: timestamp
        └── created_by: string (admin/supervisor ID)
-
-2. Users Collection
+ ```
+3. Users Collection
+ ``` data
 users (collection)
  └── user_id (document ID)
        ├── name: string
        ├── email: string
        ├── role: string ("ADMIN" | "SUPERVISOR" | "SECURITY_GUARD")
        └── created_at: timestamp
-
+```
 💻 Sample Code
 Add Vehicle
+```dart
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 Future<void> addVehicle(Map<String, dynamic> data) async {
   await FirebaseFirestore.instance.collection('vehicles').add(data);
 }
-
+```
 Fetch Vehicle by Number
+```dart
 Future<Map<String, dynamic>?> getVehicle(String number) async {
   final snapshot = await FirebaseFirestore.instance
       .collection('vehicles')
@@ -131,15 +137,16 @@ Future<Map<String, dynamic>?> getVehicle(String number) async {
   }
   return null;
 }
-
+```
 Update Vehicle
+ ``` dart
 Future<void> updateVehicle(String docId, Map<String, dynamic> data) async {
   await FirebaseFirestore.instance
       .collection('vehicles')
       .doc(docId)
       .update(data);
 }
-
+```
 🔑 Firestore Security Rules
 
 Example rules (only Admin & Supervisor can add/update vehicles):
@@ -160,26 +167,26 @@ service cloud.firestore {
 🚀 Running the Project
 
 1. Clone repo:
-
+```bash
 git clone https://github.com/your-username/vehicle-pass-app.git
 cd vehicle-pass-app
-
+```
 
 2. Add your Firebase config files:
-
+```file path
 google-services.json → android/app/
 
 GoogleService-Info.plist → ios/Runner/
-
+```
 3. Install dependencies:
-
+```bash
 flutter pub get
-
+```
 
 4. Run:
-
+```bash
 flutter run
-
+```
 📌 Notes
 
 Each developer must set up their own Firebase project.
